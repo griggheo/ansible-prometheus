@@ -46,12 +46,6 @@
      - restart prometheus
      - restart prometheus_node_exporter
 
-- name: copy rules
-  copy: src={{item}} dest={{ prometheus_config_dir }}/{{item}}
-  with_items:
-    - alert.rules
-  notify: restart prometheus
-
 - name: install packages required for PromDash
   apt: >
     pkg={{item}}

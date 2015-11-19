@@ -1,7 +1,7 @@
 Ansible-Prometheus
 =========
 
-Installs the Prometheus monitoring server and the node_exporter binary and runs them as Upstart services.
+Installs the Prometheus monitoring server, the node_exporter binary and the PromDash dashboard. Runs them as Upstart services.
 
 Role Variables
 --------------
