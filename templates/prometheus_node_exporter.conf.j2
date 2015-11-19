@@ -1,0 +1,7 @@
+# Run prometheus node_exporter
+
+start on startup
+
+script
+   {{prometheus_bin_dir}}/node_exporter
+end script

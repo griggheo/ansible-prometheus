@@ -1,0 +1,10 @@
+DAEMON_ARGS="-alertmanager.url=http://localhost:9093"
+# 4GB 
+DAEMON_ARGS="$DAEMON_ARGS -storage.local.memory-chunks=409600"
+DAEMON_ARGS="$DAEMON_ARGS -storage.local.max-chunks-to-persist=409600"
+# Keep a year of data
+DAEMON_ARGS="$DAEMON_ARGS -storage.local.retention=8760h"
+# Make links work
+DAEMON_ARGS="$DAEMON_ARGS -web.external-url=http://{{ inventory_hostname }}.{{ prometheus_host_domain_name }}:9090/"
+# Security
+ DAEMON_ARGS="$DAEMON_ARGS -web.enable-remote-shutdown=false"

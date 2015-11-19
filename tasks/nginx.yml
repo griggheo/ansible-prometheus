@@ -1,0 +1,11 @@
+- name: install nginx
+  apt: name=nginx
+
+- name: create nginx bare-bones config for redirection
+  template: src=nginx_sites_default.j2 dest=/etc/nginx/sites-enabled/default
+  notify: restart nginx
+
+- meta: flush_handlers
+
+- name: start nginx
+  service: name=nginx state=started

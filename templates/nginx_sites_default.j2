@@ -1,0 +1,4 @@
+server {
+    listen 80;
+    return 301 http://{{inventory_hostname}}.{{prometheus_host_domain_name}}:9090/consoles/node.html;
+}

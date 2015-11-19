@@ -1,0 +1,42 @@
+global:
+  scrape_interval: 30s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    target_groups:
+      - targets:
+        - {{ inventory_hostname }}:9090
+  - job_name: 'pushgateway'
+    honor_labels: true
+    target_groups:
+      - targets:
+        - {{ inventory_hostname }}:9091
+  - job_name: 'alertmanager'
+    honor_labels: true
+    target_groups:
+      - targets:
+        - {{ inventory_hostname }}:9093
+  - job_name: 'node'
+    target_groups:
+      - targets:
+{%for host in groups['api'] %}
+        - {{host}}.{{prometheus_host_domain_name}}:9100
+{%endfor%}
+{%for host in groups['api-test'] %}
+        - {{host}}.{{prometheus_host_domain_name}}:9100
+{%endfor%}
+  - job_name: 'core-v2'
+    target_groups:
+      - targets:
+{%for host in groups['api'] %}
+        - {{host}}.{{prometheus_host_domain_name}}:8000
+{%endfor%}
+        labels:
+          group: 'production'
+      - targets:
+{%for host in groups['api-test'] %}
+        - {{host}}.{{prometheus_host_domain_name}}:8000
+{%endfor%}
+        labels:
+          group: 'test'

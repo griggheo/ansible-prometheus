@@ -1,0 +1,9 @@
+# Run prometheus
+
+start on startup
+
+chdir {{prometheus_server_dir}}
+
+script
+   ./prometheus -config.file /etc/prometheus/prometheus.yml
+end script
